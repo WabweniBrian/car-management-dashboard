@@ -1,13 +1,227 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Mulish&family=Nunito&family=Nunito+Sans:wght@400;600&family=Poppins:ital,wght@0,400;0,500;1,300;1,400&family=Questrial&family=Raleway&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Testing on phone offline */
+@font-face {
+  font-family: myFont;
+  src: url("../public/Questrial-Regular.ttf") format("truetype");
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  @apply scroll-smooth;
+}
+
+*::-webkit-scrollbar {
+  @apply w-[5px] h-[5px];
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply rounded bg-slate-400;
+}
+
+*::-webkit-scrollbar-track {
+  @apply !bg-transparent;
+}
+
+body {
+  @apply font-questrial bg-main-bg text-slate-700 dark:bg-main-dark dark:text-slate-300;
+  font-family: myFont;
+}
+
+/* General styles */
+p,
+a,
+svg {
+  @apply text-muted;
+}
+
+a.btn {
+  @apply opacity-100;
+}
+
+.card {
+  @apply p-4 bg-white border rounded-lg card-shadow dark:shadow-none dark:bg-card-dark dark:border-dark;
+}
+
+.card-bordered {
+  @apply border dark:border-dark;
+}
+
+.btn {
+  @apply px-4 py-[0.35rem] rounded-lg transition-a sm:cursor-pointer capitalize flex-shrink-0;
+}
+
+.btn-primary {
+  @apply bg-primary text-white hover:bg-[#9355eb];
+}
+
+.btn-secondary {
+  @apply bg-secondaryGreen text-white hover:bg-[#129d83];
+}
+
+.icon-box {
+  @apply grid flex-shrink-0 rounded-full w-9 h-9 place-items-center text-muted hover:bg-slate-200 dark:hover:bg-hover-color-dark transition-colors sm:cursor-pointer;
+}
+
+.input-with-icon {
+  @apply relative w-full;
+}
+
+.input-with-icon input,
+.input-with-icon select {
+  @apply border border-slate-300 dark:border-dark rounded-md px-4 pl-8 py-[0.35rem] outline-none w-full bg-inherit dark:bg-main-dark focus:!border-primary;
+}
+
+.input-with-icon svg:not(.icon-send) {
+  @apply absolute top-1/2 -translate-y-1/2 left-2;
+}
+
+.avatar {
+  @apply w-8 h-8 relative before:absolute before:w-2 before:h-2 before:rounded-full before:bg-green-500 before:bottom-0 before:right-0 before:border before:border-white dark:before:border-card-dark;
+}
+/* Back to top button */
+.back-to-top-btn {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.back-to-top-btn.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+a.active {
+  @apply relative rounded-lg bg-primary/20 text-primary before:absolute before:h-full before:w-1 before:left-0 before:bg-primary;
+}
+
+/* Modals*/
+.modal {
+  @apply fixed top-0 left-0 z-20 w-full h-full opacity-0 pointer-events-none bg-black/50 lg:static lg:opacity-100 lg:pointer-events-auto lg:bg-transparent transition-opacity duration-300;
+}
+
+.dialog {
+  @apply absolute left-0 px-2 top-0 max-w-[250px] lg:overflow-hidden overflow-auto lg:hover:overflow-auto w-full h-full bg-white dark:bg-card-dark -translate-x-[500px] lg:fixed lg:translate-x-0 lg:border-r dark:border-dark transition-transform duration-300;
+}
+
+.modal.open,
+.dialog.open {
+  @apply translate-x-0 opacity-100 pointer-events-auto;
+}
+
+/* For Navbar */
+@media (max-width: 1024px) {
+  .navbar {
+    width: 100vw !important;
+  }
+}
+
+.toggle-btn.active .dot {
+  @apply translate-x-6;
+}
+
+.apexcharts-menu-icon {
+  @apply hidden;
+}
+
+/* Login & Sign-up heading didvider */
+.divider {
+  @apply relative before:absolute before:w-[45%] before:h-[2px] before:top-1/2 before:bg-slate-300 before:left-0  dark:before:bg-dark;
+  @apply relative after:absolute after:w-[45%] after:h-[2px] after:top-1/2 after:bg-gray-300 after:right-0 dark:after:bg-dark;
+}
+
+/* Check box & radio box */
+.input-check label,
+.input-radio label {
+  @apply relative cursor-pointer flex items-center select-none;
+}
+
+.input-check input[type="checkbox"],
+.input-radio input[type="radio"] {
+  @apply cursor-pointer opacity-0 absolute;
+}
+
+.input-check label::before {
+  content: "";
+  @apply w-4 h-4 mr-2 rounded border border-secondaryRed;
+}
+
+.input-check input[type="checkbox"]:checked + label::before {
+  content: "✔";
+  @apply grid place-items-center text-slate-100 text-[0.7rem] bg-secondaryRed;
+}
+
+.input-radio label::before {
+  content: "";
+  @apply w-4 h-4 mr-2 rounded-full border border-primary flex-shrink-0;
+}
+.input-radio label::after {
+  content: "";
+  @apply absolute w-2 h-2 top-1/2 left-0 -translate-y-1/2 scale-0 ml-[0.25rem] bg-primary transition-a rounded-full;
+}
+
+.input-radio input[type="radio"]:checked + label::after {
+  @apply -translate-y-1/2 scale-100;
+}
+
+/* Loader */
+.loader {
+  @apply w-20 h-20 border-4 border-primary rounded-full;
+  border-block-start-color: transparent;
+  animation: rotate 1s ease-in-out infinite;
+}
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* React Tabs */
+.react-tabs__tab-list {
+  @apply !border-none dark:!border-hover-color-dark;
+}
+
+.react-tabs__tab {
+  @apply !border-0;
+}
+
+.react-tabs__tab--selected {
+  @apply !bg-primary !text-inherit !text-white !rounded-full;
+}
+
+.react-tabs__tab:focus:after {
+  @apply !hidden;
+}
+
+/* Table */
+table th,
+table td {
+  @apply border border-[#d6dcee] dark:border-dark-light;
+}
+
+/* React Calendar */
+
+.react-calendar {
+  @apply !bg-white dark:!bg-card-dark !border-none card-shadow font-questrial rounded-lg dark:shadow-none text-slate-500 dark:text-slate-300;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  @apply !bg-slate-200 dark:!bg-dark-light rounded-lg;
+}
+
+.react-calendar__tile:enabled:hover:not(.react-calendar__tile--active),
+.react-calendar__tile:enabled:focus:not(.react-calendar__tile--active) {
+  @apply !bg-slate-200 dark:!bg-dark-light rounded-lg;
+}
+
+.react-calendar__tile--active {
+  @apply !bg-primary shadow-md rounded-md;
+}
+
+.react-calendar__tile--now {
+  @apply text-slate-500 rounded-lg;
 }

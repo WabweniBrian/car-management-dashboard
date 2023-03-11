@@ -1,0 +1,12 @@
+export { default as Dashboard } from "./Dashboard";
+export { default as Assets } from "./Assets";
+export { default as Booking } from "./Booking";
+export { default as SellCars } from "./SellCars";
+export { default as BuyCars } from "./BuyCars";
+export { default as Services } from "./Services";
+export { default as Calendar } from "./Calendar";
+export { default as Messages } from "./Messages";
+export { default as Settings } from "./Settings";
+export { default as Login } from "./Login";
+export { default as Register } from "./Register";
+export { default as PageNotFound } from "./PageNotFound";
